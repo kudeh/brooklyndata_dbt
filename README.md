@@ -6,11 +6,11 @@
 ## prerequistes
 * Install Snowsql: https://docs.snowflake.com/en/user-guide/snowsql-install-config
 * Follow steps to configure snowsql: https://docs.snowflake.com/en/user-guide/snowsql-config
-* Have Python3 installe
+* Have Python3 installed
 
 ## set up
 * To create and load raw data to DB:
-  * replace(<ACCOUNT_NAME>, <LOGIN_NAME>) and run :
+  * replace(<ACCOUNT_NAME>, <LOGIN_NAME>) and run:
   ```bash
   snowsql -a <ACCOUNT_NAME> -u <LOGIN_NAME> -f create_load_data.sql
   ```
@@ -21,5 +21,6 @@
    source venv/bin/activate
    pip install -r requirements.txt
    ```
+* update dbt snowflake credentials in `profile_credentials`
 
 # 
