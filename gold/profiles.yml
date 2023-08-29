@@ -1,0 +1,13 @@
+gold:
+  outputs:
+    dev:
+      type: snowflake
+      threads: 1
+      account: "{{ env_var('ACCOUNT') }}"
+      database: gold
+      password: "{{ env_var('PASSWORD') }}"
+      role: "{{ env_var('ROLE') }}"
+      schema: dbt
+      user: "{{ env_var('USER') }}"
+      warehouse: "{{ env_var('WAREHOUSE') }}"
+  target: dev

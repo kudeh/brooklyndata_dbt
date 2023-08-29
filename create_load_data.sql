@@ -1,0 +1,191 @@
+-- CREATE DATABASE
+CREATE DATABASE IF NOT EXISTS BD_RAW;
+
+-- CREATE SCHEMA
+CREATE SCHEMA IF NOT EXISTS BD_RAW.BROOKLYNDATA;
+
+-- CREATE INTERNAL STAGE
+CREATE STAGE IF NOT EXISTS BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES;
+
+-- PUT FILES
+PUT 'file://brooklyndata/olist_orders_dataset__batch_0.csv' @BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES AUTO_COMPRESS=FALSE;
+PUT 'file://brooklyndata/olist_orders_dataset__batch_1.csv' @BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES AUTO_COMPRESS=FALSE;
+PUT 'file://brooklyndata/olist_order_reviews_dataset__batch_0.csv' @BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES AUTO_COMPRESS=FALSE;
+PUT 'file://brooklyndata/olist_order_reviews_dataset__batch_1.csv' @BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES AUTO_COMPRESS=FALSE;
+PUT 'file://brooklyndata/olist_order_items_dataset__batch_0.csv' @BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES AUTO_COMPRESS=FALSE;
+PUT 'file://brooklyndata/olist_order_items_dataset__batch_1.csv' @BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES AUTO_COMPRESS=FALSE;
+PUT 'file://brooklyndata/olist_order_payments_dataset.csv' @BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES AUTO_COMPRESS=FALSE;
+PUT 'file://brooklyndata/olist_order_customer_dataset.csv' @BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES AUTO_COMPRESS=FALSE;
+PUT 'file://brooklyndata/olist_products_dataset.csv' @BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES AUTO_COMPRESS=FALSE;
+PUT 'file://brooklyndata/olist_sellers_dataset.csv' @BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES AUTO_COMPRESS=FALSE;
+PUT 'file://brooklyndata/olist_geolocation_dataset__batch_0.csv' @BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES AUTO_COMPRESS=FALSE;
+PUT 'file://brooklyndata/olist_geolocation_dataset__batch_1.csv' @BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES AUTO_COMPRESS=FALSE;
+PUT 'file://brooklyndata/olist_geolocation_dataset__batch_2.csv' @BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES AUTO_COMPRESS=FALSE;
+PUT 'file://brooklyndata/olist_geolocation_dataset__batch_3.csv' @BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES AUTO_COMPRESS=FALSE;
+
+
+-- CREATE FILE FORMAT
+CREATE OR REPLACE FILE FORMAT BD_RAW.BROOKLYNDATA.MY_CSV_FORMAT TYPE = 'CSV' SKIP_HEADER = 1  FIELD_OPTIONALLY_ENCLOSED_BY = '"';
+
+
+-- CREATE OLIST_ORDERS
+CREATE OR REPLACE TABLE BD_RAW.BROOKLYNDATA.OLIST_ORDERS (
+  order_id STRING,
+  customer_id STRING,
+  order_status STRING,
+  order_purchase_timestamp TIMESTAMP,
+  order_approved_at TIMESTAMP,
+  order_delivered_carrier_date TIMESTAMP,
+  order_delivered_customer_date TIMESTAMP,
+  order_estimated_delivery_date TIMESTAMP
+);
+-- Load data from the first batch file into the table
+COPY INTO BD_RAW.BROOKLYNDATA.OLIST_ORDERS
+FROM @BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES
+FILE_FORMAT = (FORMAT_NAME = BD_RAW.BROOKLYNDATA.MY_CSV_FORMAT)
+PATTERN = 'olist_orders_dataset__batch_0\.csv';
+-- Load data from the second batch file into the table
+COPY INTO BD_RAW.BROOKLYNDATA.OLIST_ORDERS
+FROM @BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES
+FILE_FORMAT = (FORMAT_NAME = BD_RAW.BROOKLYNDATA.MY_CSV_FORMAT)
+PATTERN = 'olist_orders_dataset__batch_1\.csv';
+
+
+-- CREATE OLIST_ORDER_REVIEWS
+CREATE OR REPLACE TABLE BD_RAW.BROOKLYNDATA.OLIST_ORDER_REVIEWS (
+  review_id STRING,
+  order_id STRING,
+  review_score INTEGER,
+  review_comment_title STRING,
+  review_comment_message STRING,
+  review_creation_date TIMESTAMP,
+  review_answer_timestamp TIMESTAMP
+);
+-- Load data from the first batch file into the table
+COPY INTO BD_RAW.BROOKLYNDATA.OLIST_ORDER_REVIEWS
+FROM @BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES
+FILE_FORMAT = (FORMAT_NAME = BD_RAW.BROOKLYNDATA.MY_CSV_FORMAT)
+PATTERN = 'olist_order_reviews_dataset__batch_0\.csv';
+-- Load data from the second batch file into the table
+COPY INTO BD_RAW.BROOKLYNDATA.OLIST_ORDER_REVIEWS
+FROM @BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES
+FILE_FORMAT = (FORMAT_NAME = BD_RAW.BROOKLYNDATA.MY_CSV_FORMAT)
+PATTERN = 'olist_order_reviews_dataset__batch_1\.csv';
+
+
+-- CREATE OLIST_ORDER_ITEMS
+CREATE OR REPLACE TABLE BD_RAW.BROOKLYNDATA.OLIST_ORDER_ITEMS (
+  order_id STRING,
+  order_item_id INTEGER,
+  product_id STRING,
+  seller_id STRING,
+  shipping_limit_date TIMESTAMP,
+  price FLOAT,
+  freight_value FLOAT
+);
+-- Load data from the first batch file into the table
+COPY INTO BD_RAW.BROOKLYNDATA.OLIST_ORDER_ITEMS
+FROM @BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES
+FILE_FORMAT = (FORMAT_NAME = BD_RAW.BROOKLYNDATA.MY_CSV_FORMAT)
+PATTERN = 'olist_order_items_dataset__batch_0\.csv';
+-- Load data from the second batch file into the table
+COPY INTO BD_RAW.BROOKLYNDATA.OLIST_ORDER_ITEMS
+FROM @BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES
+FILE_FORMAT = (FORMAT_NAME = BD_RAW.BROOKLYNDATA.MY_CSV_FORMAT)
+PATTERN = 'olist_order_items_dataset__batch_1\.csv';
+
+
+-- CREATE OLIST_ORDER_PAYMENTS
+CREATE OR REPLACE TABLE BD_RAW.BROOKLYNDATA.OLIST_ORDER_PAYMENTS (
+  order_id STRING,
+  payment_sequential INTEGER,
+  payment_type STRING,
+  payment_installments INTEGER,
+  payment_value FLOAT
+);
+-- load data
+COPY INTO BD_RAW.BROOKLYNDATA.OLIST_ORDER_PAYMENTS
+FROM @BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES
+FILE_FORMAT = (FORMAT_NAME = BD_RAW.BROOKLYNDATA.MY_CSV_FORMAT)
+PATTERN = 'olist_order_payments_dataset.csv';
+
+
+-- CREATE OLIST_ORDER_CUSTOMER
+CREATE OR REPLACE TABLE BD_RAW.BROOKLYNDATA.OLIST_ORDER_CUSTOMER (
+  customer_id STRING,
+  customer_unique_id STRING,
+  customer_zip_code_prefix STRING,
+  customer_city STRING,
+  customer_state STRING
+);
+-- load data
+COPY INTO BD_RAW.BROOKLYNDATA.OLIST_ORDER_CUSTOMER
+FROM @BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES
+FILE_FORMAT = (FORMAT_NAME = BD_RAW.BROOKLYNDATA.MY_CSV_FORMAT)
+PATTERN = 'olist_order_customer_dataset.csv';
+
+
+-- CREATE OLIST_PRODUCTS
+CREATE OR REPLACE TABLE BD_RAW.BROOKLYNDATA.OLIST_PRODUCTS (
+  product_id STRING,
+  product_category_name STRING,
+  product_name_length INTEGER,
+  product_description_length INTEGER,
+  product_photos_qty INTEGER,
+  product_weight_g INTEGER,
+  product_length_cm FLOAT,
+  product_height_cm FLOAT,
+  product_width_cm FLOAT
+);
+-- load data
+COPY INTO BD_RAW.BROOKLYNDATA.OLIST_PRODUCTS
+FROM @BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES
+FILE_FORMAT = (FORMAT_NAME = BD_RAW.BROOKLYNDATA.MY_CSV_FORMAT)
+PATTERN = 'olist_products_dataset.csv';
+
+
+-- CREATE OLIST_SELLERS
+CREATE OR REPLACE TABLE BD_RAW.BROOKLYNDATA.OLIST_SELLERS (
+  seller_id STRING,
+  seller_zip_code_prefix STRING,
+  seller_city STRING,
+  seller_state STRING
+);
+-- load data
+COPY INTO BD_RAW.BROOKLYNDATA.OLIST_SELLERS
+FROM @BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES
+FILE_FORMAT = (FORMAT_NAME = BD_RAW.BROOKLYNDATA.MY_CSV_FORMAT)
+PATTERN = 'olist_sellers_dataset.csv';
+
+
+-- CREATE OLIST_GEOLOCATION
+CREATE OR REPLACE TABLE BD_RAW.BROOKLYNDATA.OLIST_GEOLOCATION (
+  geolocation_zip_code_prefix STRING,
+  geolocation_lat FLOAT,
+  geolocation_lng FLOAT,
+  geolocation_city STRING,
+  geolocation_state STRING
+);
+-- Load data from the first batch file into the table
+COPY INTO BD_RAW.BROOKLYNDATA.OLIST_GEOLOCATION
+FROM @BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES
+FILE_FORMAT = (FORMAT_NAME = BD_RAW.BROOKLYNDATA.MY_CSV_FORMAT)
+PATTERN = 'olist_geolocation_dataset__batch_0\.csv';
+-- Load data from the second batch file into the table
+COPY INTO BD_RAW.BROOKLYNDATA.OLIST_GEOLOCATION
+FROM @BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES
+FILE_FORMAT = (FORMAT_NAME = BD_RAW.BROOKLYNDATA.MY_CSV_FORMAT)
+PATTERN = 'olist_geolocation_dataset__batch_1\.csv';
+-- Load data from the third batch file into the table
+COPY INTO BD_RAW.BROOKLYNDATA.OLIST_GEOLOCATION
+FROM @BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES
+FILE_FORMAT = (FORMAT_NAME = BD_RAW.BROOKLYNDATA.MY_CSV_FORMAT)
+PATTERN = 'olist_geolocation_dataset__batch_2\.csv';
+-- Load data from the fourth batch file into the table
+COPY INTO BD_RAW.BROOKLYNDATA.OLIST_GEOLOCATION
+FROM @BD_RAW.BROOKLYNDATA.BROOKLYNDATA_OLIST_FILES
+FILE_FORMAT = (FORMAT_NAME = BD_RAW.BROOKLYNDATA.MY_CSV_FORMAT)
+PATTERN = 'olist_geolocation_dataset__batch_3\.csv';
+
+-- CREATE GOLD DATABASE
+CREATE DATABASE IF NOT EXISTS BD_RAW;
