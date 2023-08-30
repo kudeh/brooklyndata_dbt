@@ -7,6 +7,7 @@
 }}
 
 SELECT
+    CONCAT(order_id, '-', order_item_id) AS _key,
     order_id,
     order_item_id,
     product_id,

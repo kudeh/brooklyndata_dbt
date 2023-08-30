@@ -8,27 +8,22 @@ models:
     columns:
       - name: product_id
         description: The unique identifier for the product
-          
+        tests:
+          - unique
+          - not_null
       - name: product_category_name
         description: The name of the product's category
-
       - name: product_name_length
         description: The length of the product's name
-
       - name: product_description_length
         description: The length of the product's description
-
       - name: product_photos_qty
         description: The quantity of photos for the product
-
       - name: product_weight_g
         description: The weight of the product in grams
-
       - name: product_length_cm
         description: The length of the product in centimeters
-
       - name: product_height_cm
         description: The height of the product in centimeters
-
       - name: product_width_cm
         description: The width of the product in centimeters

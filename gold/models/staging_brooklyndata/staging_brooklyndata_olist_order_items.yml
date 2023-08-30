@@ -7,17 +7,36 @@ models:
       product ID, seller ID, shipping limit date, price, and freight value.
 
     columns:
+      - name: _key
+        description: a unique key for order item within an order
+        tests:
+          - unique
+          - not_null
       - name: order_id
         description: The unique identifier of the order.
+        tests:
+          - not_null
       - name: order_item_id
         description: The identifier of the order item.
+        tests:
+          - not_null
       - name: product_id
         description: The unique identifier of the product.
+        tests:
+          - not_null
       - name: seller_id
         description: The unique identifier of the seller.
+        tests:
+          - not_null
       - name: shipping_limit_date
         description: The date and time when the shipping limit for the item expires.
+        tests:
+          - not_null
       - name: price
         description: The price of the order item.
+        tests:
+          - not_null
       - name: freight_value
         description: The value of the freight associated with the order item.
+        tests:
+          - not_null

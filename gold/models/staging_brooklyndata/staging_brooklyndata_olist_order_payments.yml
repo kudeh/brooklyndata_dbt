@@ -7,13 +7,28 @@ models:
       payment sequential number, payment type, payment installments, and payment value.
 
     columns:
+      - name: _key
+        description: The unique identifier for payment within an order
+        tests:
+          - unique
+          - not_null
       - name: order_id
         description: The unique identifier of the order.
+        tests:
+          - not_null
       - name: payment_sequential
         description: The sequence number of the payment within the order.
+        tests:
+          - not_null
       - name: payment_type
         description: The type of payment used for the order.
+        tests:
+          - not_null
       - name: payment_installments
         description: The number of installments in which the payment was divided.
+        tests:
+          - not_null
       - name: payment_value
         description: The total value of the payment for the order.
+        tests:
+          - not_null

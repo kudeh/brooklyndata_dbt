@@ -16,6 +16,7 @@ models:
           - not_null
       - name: customer_id
         tests:
+          - unique
           - not_null
         description: The unique identifier of the customer who placed the order.
       - name: order_status

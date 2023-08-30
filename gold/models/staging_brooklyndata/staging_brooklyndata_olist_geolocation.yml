@@ -9,11 +9,21 @@ models:
     columns:
       - name: geolocation_zip_code_prefix
         description: The zip code prefix associated with the geolocation.
+        tests:
+          - not_null
       - name: geolocation_lat
         description: The latitude coordinate of the geolocation.
+        tests:
+          - not_null
       - name: geolocation_lng
         description: The longitude coordinate of the geolocation.
+        tests:
+          - not_null
       - name: geolocation_city
         description: The city associated with the geolocation.
+        tests:
+          - not_null
       - name: geolocation_state
         description: The state associated with the geolocation.
+        tests:
+          - not_null

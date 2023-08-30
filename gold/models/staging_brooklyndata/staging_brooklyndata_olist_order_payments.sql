@@ -7,6 +7,7 @@
 }}
 
 SELECT
+    CONCAT(order_id, '-', payment_sequential) AS _key,
     order_id,
     payment_sequential,
     payment_type,

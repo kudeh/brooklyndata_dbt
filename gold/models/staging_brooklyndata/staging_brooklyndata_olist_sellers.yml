@@ -9,9 +9,18 @@ models:
     columns:
       - name: seller_id
         description: The unique identifier of the seller.
+        tests:
+          - unique
+          - not_null
       - name: seller_zip_code_prefix
         description: The zip code prefix associated with the seller.
+        tests:
+          - not_null
       - name: seller_city
         description: The city where the seller is located.
+        tests:
+          - not_null
       - name: seller_state
         description: The state where the seller is located.
+        tests:
+          - not_null

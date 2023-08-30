@@ -9,11 +9,22 @@ models:
     columns:
       - name: customer_id
         description: The identifier for the customer.
+        tests:
+          - unique
+          - not_null
       - name: customer_unique_id
         description: The unique identifier for the customer.
+        tests:
+          - not_null
       - name: customer_zip_code_prefix
         description: The zip code prefix associated with the customer.
+        tests:
+          - not_null
       - name: customer_city
         description: The city where the customer is located.
+        tests:
+          - not_null
       - name: customer_state
         description: The state where the customer is located.
+        tests:
+          - not_null

@@ -15,3 +15,4 @@ SELECT
     review_creation_date,
     review_answer_timestamp
 FROM {{ source('brooklyndata', 'olist_order_reviews') }}
+QUALIFY ROW_NUMBER() OVER (PARTITION BY order_id ORDER BY review_answer_timestamp DESC) = 1 -- take latest review for order
