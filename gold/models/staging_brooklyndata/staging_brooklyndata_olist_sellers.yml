@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: staging_brooklyndata_olist_sellers
+    description: >
+      This `dbt` model represents seller information with details such as seller ID,
+      zip code prefix, city, and state.
+
+    columns:
+      - name: seller_id
+        description: The unique identifier of the seller.
+      - name: seller_zip_code_prefix
+        description: The zip code prefix associated with the seller.
+      - name: seller_city
+        description: The city where the seller is located.
+      - name: seller_state
+        description: The state where the seller is located.

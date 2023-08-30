@@ -1,0 +1,23 @@
+version: 2
+
+models:
+  - name: staging_brooklyndata_olist_order_items
+    description: >
+      This `dbt` model represents order item information with details such as order ID, item ID,
+      product ID, seller ID, shipping limit date, price, and freight value.
+
+    columns:
+      - name: order_id
+        description: The unique identifier of the order.
+      - name: order_item_id
+        description: The identifier of the order item.
+      - name: product_id
+        description: The unique identifier of the product.
+      - name: seller_id
+        description: The unique identifier of the seller.
+      - name: shipping_limit_date
+        description: The date and time when the shipping limit for the item expires.
+      - name: price
+        description: The price of the order item.
+      - name: freight_value
+        description: The value of the freight associated with the order item.

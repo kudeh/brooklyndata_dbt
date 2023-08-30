@@ -1,0 +1,24 @@
+version: 2
+
+models:
+  - name: staging_brooklyndata_olist_order_reviews
+    description: >
+      This `dbt` model represents order review information with details such as review ID,
+      order ID, review score, review comment title, review comment message,
+      review creation date, and review answer timestamp.
+
+    columns:
+      - name: review_id
+        description: The unique identifier of the review.
+      - name: order_id
+        description: The unique identifier of the order associated with the review.
+      - name: review_score
+        description: The customer's review score (1 to 5) for the order.
+      - name: review_comment_title
+        description: The title of the review comment left by the customer.
+      - name: review_comment_message
+        description: The content of the review comment left by the customer.
+      - name: review_creation_date
+        description: The date and time when the review was created.
+      - name: review_answer_timestamp
+        description: The date and time when the seller answered the review.

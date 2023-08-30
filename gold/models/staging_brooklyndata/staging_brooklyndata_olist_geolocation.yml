@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: staging_brooklyndata_olist_geolocation
+    description: >
+      This `dbt` model represents geolocation data with zip code prefix, latitude, longitude,
+      city, and state information.
+
+    columns:
+      - name: geolocation_zip_code_prefix
+        description: The zip code prefix associated with the geolocation.
+      - name: geolocation_lat
+        description: The latitude coordinate of the geolocation.
+      - name: geolocation_lng
+        description: The longitude coordinate of the geolocation.
+      - name: geolocation_city
+        description: The city associated with the geolocation.
+      - name: geolocation_state
+        description: The state associated with the geolocation.

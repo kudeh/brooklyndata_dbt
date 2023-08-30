@@ -1,0 +1,19 @@
+version: 2
+
+models:
+  - name: staging_brooklyndata_olist_order_payments
+    description: >
+      This `dbt` model represents order payment information with details such as order ID,
+      payment sequential number, payment type, payment installments, and payment value.
+
+    columns:
+      - name: order_id
+        description: The unique identifier of the order.
+      - name: payment_sequential
+        description: The sequence number of the payment within the order.
+      - name: payment_type
+        description: The type of payment used for the order.
+      - name: payment_installments
+        description: The number of installments in which the payment was divided.
+      - name: payment_value
+        description: The total value of the payment for the order.
