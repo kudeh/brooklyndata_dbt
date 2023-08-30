@@ -3,22 +3,32 @@ version: 2
 models:
   - name: staging_brooklyndata_olist_products
     description: >
-      This `dbt` model represents order review information with details such as review ID,
-      order ID, review score, review comment title, review comment message,
-      review creation date, and review answer timestamp.
-
+      A model containing information about products, including their identifiers,
+      category names, dimensions, and other attributes.
     columns:
-      - name: review_id
-        description: The unique identifier of the review.
-      - name: order_id
-        description: The unique identifier of the order associated with the review.
-      - name: review_score
-        description: The customer's review score (1 to 5) for the order.
-      - name: review_comment_title
-        description: The title of the review comment left by the customer.
-      - name: review_comment_message
-        description: The content of the review comment left by the customer.
-      - name: review_creation_date
-        description: The date and time when the review was created.
-      - name: review_answer_timestamp
-        description: The date and time when the seller answered the review.
+      - name: product_id
+        description: The unique identifier for the product
+          
+      - name: product_category_name
+        description: The name of the product's category
+
+      - name: product_name_length
+        description: The length of the product's name
+
+      - name: product_description_length
+        description: The length of the product's description
+
+      - name: product_photos_qty
+        description: The quantity of photos for the product
+
+      - name: product_weight_g
+        description: The weight of the product in grams
+
+      - name: product_length_cm
+        description: The length of the product in centimeters
+
+      - name: product_height_cm
+        description: The height of the product in centimeters
+
+      - name: product_width_cm
+        description: The width of the product in centimeters

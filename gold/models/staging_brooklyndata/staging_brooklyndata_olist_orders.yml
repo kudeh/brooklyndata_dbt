@@ -22,11 +22,11 @@ models:
         description: The current status of the order (e.g., shipped, delivered, canceled).
         tests:
           - not_null
-      - name: order_purchase_date
+      - name: order_purchase_timestamp
         description: The date and time when the order was purchased.
         tests:
           - not_null
-      - name: order_approved_date
+      - name: order_approved_at
         description: The date and time when the order was approved by the system.
       - name: order_delivered_carrier_date
         description: The date and time when the order was handed over to the carrier for delivery.
