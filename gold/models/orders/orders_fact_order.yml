@@ -1,12 +1,9 @@
-
 version: 2
 
 models:
-  - name: staging_brooklyndata_olist_orders
+  - name: orders_fact_order
     description: >
-      This `dbt` model represents the core information about orders from the Olist E-commerce dataset.
-      It combines data from the `brooklyndata.olist_orders_dataset` schema to provide a comprehensive view
-      of each order's details.
+      Order facts on the order_id level gradularity
 
     columns:
       - name: order_id
@@ -18,6 +15,10 @@ models:
         description: The unique identifier of the customer who placed the order.
         tests:
           - unique
+          - not_null
+      - name: review_id
+        description: The unique identifier of the review.
+        tests:
           - not_null
       - name: order_status
         description: The current status of the order (e.g., shipped, delivered, canceled).
@@ -35,3 +36,19 @@ models:
         description: The date and time when the order was delivered to the customer.
       - name: order_estimated_delivery_date
         description: The estimated date of delivery provided at the time of purchase.
+      - name: total_price
+        description: Total price of order
+        tests:
+          - not_null
+      - name: total_freight
+        description: Total freight of order
+        tests:
+          - not_null
+      - name: total_cost
+        description: Total cost of order (price + freight)
+        tests:
+          - not_null
+      - name: paid_amount
+        description: Total amout paid for order
+        tests:
+          - not_null
