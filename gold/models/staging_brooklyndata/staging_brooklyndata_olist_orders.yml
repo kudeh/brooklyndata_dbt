@@ -1,0 +1,37 @@
+
+version: 2
+
+models:
+  - name: staging_brooklyndata_olist_orders
+    description: >
+      This `dbt` model represents the core information about orders from the Olist E-commerce dataset.
+      It combines data from the `brooklyndata.olist_orders_dataset` schema to provide a comprehensive view
+      of each order's details.
+
+    columns:
+      - name: order_id
+        description: The unique identifier of the order.
+        tests:
+          - unique
+          - not_null
+      - name: customer_id
+        tests:
+          - unique
+          - not_null
+        description: The unique identifier of the customer who placed the order.
+      - name: order_status
+        description: The current status of the order (e.g., shipped, delivered, canceled).
+        tests:
+          - not_null
+      - name: order_purchase_timestamp
+        description: The date and time when the order was purchased.
+        tests:
+          - not_null
+      - name: order_approved_at
+        description: The date and time when the order was approved by the system.
+      - name: order_delivered_carrier_date
+        description: The date and time when the order was handed over to the carrier for delivery.
+      - name: order_delivered_customer_date
+        description: The date and time when the order was delivered to the customer.
+      - name: order_estimated_delivery_date
+        description: The estimated date of delivery provided at the time of purchase.

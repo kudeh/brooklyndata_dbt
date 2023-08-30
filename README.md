@@ -22,5 +22,10 @@
    pip install -r requirements.txt
    ```
 * update dbt snowflake credentials in `profile_credentials`
+* ```bash
+  cd gold
+  source ../profile_credentials
+  ```
+
 
 # 
