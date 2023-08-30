@@ -1,0 +1,65 @@
+version: 2
+
+models:
+  - name: orders_fact_order_item
+    description: >
+      Order facts on the order_id,order_item_id level gradularity
+
+    columns:
+      - name: id
+        description: The unique identifier.
+        tests:
+          - unique
+          - not_null
+      - name: order_id
+        description: The unique identifier of the order.
+        tests:
+          - not_null
+      - name: order_item_id
+        description: The identifier of the order item.
+        tests:
+          - not_null
+      - name: product_id
+        description: The unique identifier of the product.
+        tests:
+          - not_null
+      - name: customer_id
+        description: The unique identifier of the customer who placed the order.
+        tests:
+          - not_null
+      - name: review_id
+        description: The unique identifier of the review.
+        tests:
+          - not_null
+      - name: seller_id
+        description: The unique identifier of the seller.
+        tests:
+          - not_null
+      - name: order_status
+        description: The current status of the order (e.g., shipped, delivered, canceled).
+        tests:
+          - not_null
+      - name: order_purchase_timestamp
+        description: The date and time when the order was purchased.
+        tests:
+          - not_null
+      - name: order_approved_at
+        description: The date and time when the order was approved by the system.
+      - name: order_delivered_carrier_date
+        description: The date and time when the order was handed over to the carrier for delivery.
+      - name: order_delivered_customer_date
+        description: The date and time when the order was delivered to the customer.
+      - name: order_estimated_delivery_date
+        description: The estimated date of delivery provided at the time of purchase.
+      - name: shipping_limit_date
+        description: The date and time when the shipping limit for the item expires.
+        tests:
+          - not_null
+      - name: product_category_name
+        description: The name of the product's category
+      - name: price
+        description: Total price of order
+      - name: freight_value
+        description: Total freight of order
+      - name: cost
+        description: Total cost of order item (price + freight)
