@@ -1,10 +1,10 @@
-Welcome to your new dbt project!
-
-### Using the starter project
+### brooklyndata dbt gold
 
 Try running the following commands:
 - dbt run
-- dbt test
+- dbt test --store-failures
+- dbt docs generate
+- dbt docs serve
 
 
 ### Resources:
