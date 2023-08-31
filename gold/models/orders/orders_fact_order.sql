@@ -40,6 +40,7 @@ order_payments AS (
 SELECT 
     o.order_id,
     o.customer_id,
+    c.customer_unique_id,
     r.review_id,
     o.order_status,
     o.order_purchase_timestamp,
@@ -53,5 +54,6 @@ SELECT
     COALESCE(op.paid_amount, 0) AS paid_amount
 FROM orders AS o
 LEFT JOIN {{ ref('staging_brooklyndata_olist_order_reviews') }} AS r ON o.order_id = r.order_id
+LEFT JOIN {{ ref('staging_brooklyndata_olist_order_customer') }} AS c ON o.customer_id = c.customer_id
 LEFT JOIN order_items AS oi ON o.order_id = oi.order_id
 LEFT JOIN order_payments AS op ON o.order_id = op.order_id
