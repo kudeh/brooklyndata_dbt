@@ -1,7 +1,7 @@
 # brooklyndata_dbt
 * Loads Brooklyndata olist dataset(https://app.mode.com/brooklyndata/tables) to Snowflake
 * Creates data models using dbt
-![Alt text](image.png)
+![Alt text](imgs/image.png)
 
 ## prerequistes
 * Have a [snowflake](https://signup.snowflake.com/?utm_source=google&utm_medium=paidsearch&utm_campaign=na-ca-en-brand-product-phrase&utm_content=go-eta-evg-ss-free-trial&utm_term=c-g-snowflake%20software-p&_bt=579189974810&_bk=snowflake%20software&_bm=p&_bn=g&_bg=136172940948&gclsrc=aw.ds&gad=1&gclid=Cj0KCQjwl8anBhCFARIsAKbbpyS5Y7XMEmrxORu7SObFo3SAqnAwaCdM7ov2ACIbl5wiPa44G3Mw4EsaAkA3EALw_wcB) account setup
@@ -33,3 +33,9 @@ dbt test --store-failures
 dbt docs generate
 dbt docs serve
 ```
+
+# results
+* created resources
+![Alt text](imgs/snowflake_resources.png)
+* data lineage
+![Alt text](imgs/lineage.png)
