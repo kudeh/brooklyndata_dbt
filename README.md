@@ -29,6 +29,7 @@
 cd gold
 source ../profile_credentials
 
+dbt run
 dbt test --store-failures
 dbt docs generate
 dbt docs serve
